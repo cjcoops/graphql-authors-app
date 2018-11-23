@@ -1,0 +1,37 @@
+<div class="row">
+  <h4 class="column">Authors and Books</h4>
+  <div class="column column-25"><ng-content></ng-content></div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Books</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let author of authors">
+      <td>{{ author.firstName }}</td>
+      <td>{{ author.lastName }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let book of author.books" (click)="editBook.emit(book)">
+            <a>{{ book.title | titlecase }}</a>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <!--
+          <button class="button button-outline" (click)="editAuthor.emit(author)">
+            Edit
+          </button>
+        -->
+        <a (click)="editAuthor.emit(author)"><small>Edit</small></a> |
+        <a (click)="addBook.emit(author)"><small>Add Book</small></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

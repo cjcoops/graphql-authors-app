@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="column column-75">
+      <app-authors
+        [authors]="data | async | select: 'authors'"
+        (editAuthor)="handleEditAuthor($event)"
+        (editBook)="handleEditBook($event)"
+        (addBook)="handleAddBook($event)"
+      >
+        <input
+          type="text"
+          placeholder="Search by author name..."
+          id="searchName"
+          [ngModel]="searchName"
+          (ngModelChange)="handleSearchNameChange($event)"
+      /></app-authors>
+    </div>
+    <div class="column column-25 edit-panel">
+      <app-edit-author
+        *ngIf="showEditAuthor"
+        [author]="activeAuthor"
+        (updateAuthor)="handleUpdateAuthor($event)"
+      ></app-edit-author>
+      <app-edit-book
+        *ngIf="showEditBook"
+        [book]="activeBook"
+        (updateBook)="handleUpdateBook($event)"
+        (addBook)="handleCreateBook($event)"
+        (deleteBook)="handleDeleteBook($event)"
+      ></app-edit-book>
+    </div>
+  </div>
+</div>

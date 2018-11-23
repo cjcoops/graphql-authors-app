@@ -1,0 +1,10 @@
+<h4>Update Author</h4>
+<form [formGroup]="form">
+  <fieldset>
+    <label for="firstName">First name</label>
+    <input type="text" id="firstName" formControlName="firstName" />
+    <label for="lastName">Last name</label>
+    <input type="text" id="lastName" formControlName="lastName" />
+    <input class="button-primary" type="submit" value="Update" (click)=updateAuthor.emit(form.value)/>
+  </fieldset>
+</form>

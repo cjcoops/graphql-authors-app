@@ -1,0 +1,24 @@
+<h4>{{ book ? 'Update' : 'Add' }} Book</h4>
+<form [formGroup]="form">
+  <fieldset>
+    <label for="title">Title</label>
+    <input type="text" id="title" formControlName="title" />
+    <label for="publisher">Publisher</label>
+    <input type="text" id="publisher" formControlName="publisher" />
+    <label for="edition">Edition</label>
+    <input type="text" id="edition" formControlName="edition" />
+    <input
+      class="button-primary"
+      type="submit"
+      value="{{ book ? 'Update' : 'Add' }}"
+      (click)="onSubmit()"
+    />
+    <input
+      *ngIf="book"
+      class="button button-clear"
+      type="submit"
+      value="Delete"
+      (click)="deleteBook.emit(book)"
+    />
+  </fieldset>
+</form>
