@@ -1,5 +1,5 @@
-const { ApolloServer, makeExecutableSchema, gql } = require("apollo-server");
-const data = require("./faker");
+const { ApolloServer, makeExecutableSchema, gql } = require('apollo-server');
+const data = require('./faker');
 
 const typeDefs = gql`
   type Author {
@@ -55,29 +55,22 @@ const resolvers = {
   Query: {
     authors: (_, args) => {
       let authors = data.authors;
-      if ("firstName" in args) {
+      if ('firstName' in args) {
         authors = authors.filter(
           author =>
-            author.firstName.search(new RegExp(args.firstName, "i")) > -1 ||
-            author.lastName.search(new RegExp(args.firstName, "i")) > -1
+            author.firstName.search(new RegExp(args.firstName, 'i')) > -1 ||
+            author.lastName.search(new RegExp(args.firstName, 'i')) > -1
         );
       }
-      //   if ("lastName" in args) {
-      //     authors = authors.filter(
-      //       author =>
-      //         author.firstName.search(new RegExp(args.firstName, "i")) > -1 ||
-      //         author.lastName.search(new RegExp(args.lastName, "i")) > -1
-      //     );
-      //   }
       return authors;
     },
     author: (_, { id }) => findById(data.authors, id),
     books: (_, args) => {
       let books = data.books;
-      if ("title" in args) {
+      if ('title' in args) {
         books = books.filter(author => book.title === args.title);
       }
-      if ("authorId" in args) {
+      if ('authorId' in args) {
         books = books.filter(book => book.authorId === args.authorId);
       }
       return books;
