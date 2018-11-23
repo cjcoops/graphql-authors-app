@@ -58,10 +58,10 @@ const resolvers = {
         authors: (_, args) => {
             let authors = data.authors;
             if ('firstName' in args) {
-                authors = authors.filter(author => author.firstName === args.firstName);
+                authors = authors.filter(author => author.firstName.indexOf(args.firstName > -1));
             }
             if ('lastName' in args) {
-                authors = authors.filter(author => author.lastName === args.lastName)
+                authors = authors.filter(author => author.lastName.indexOf(args.lastName) > -1);
             }
             return authors;
         },
@@ -84,6 +84,7 @@ const resolvers = {
             if (!author) {
                 throw Error(`Author (${book.authorId}) does not exist`)
             }
+            book.id = data.books.length + 1
             data.books.push(book);
             return book;
         },
@@ -106,7 +107,8 @@ const resolvers = {
             if (index === null) {
                 throw Error(`Book (${id}) does not exist`)
             }
-            return data.books.splice(index, 1);
+            data.books.splice(index, 1);
+            return {id};
         },
         addAuthor: (_, { author }) => {
             data.authors.push(author);
